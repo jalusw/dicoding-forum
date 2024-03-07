@@ -1,21 +1,30 @@
 import { RouteObject } from 'react-router-dom';
-import { NotFoundPage } from '@/common/components';
+import { GuestRoute, NotFoundPage } from '@/common/components';
 
 import { HomePage } from '@/features/threads/components';
 import { LoginPage, RegisterPage } from '@/features/authentication/components';
+import ProtectedRoute from '@/common/components/route/ProtectedRoute';
 
 const routes: RouteObject[] = [
   {
     path: '/register',
-    element: <RegisterPage />,
+    element: (
+      <GuestRoute>
+        <RegisterPage />
+      </GuestRoute>
+    ),
   },
   {
     path: '/login',
-    element: <LoginPage/>
+    element: (
+      <GuestRoute>
+        <LoginPage />
+      </GuestRoute>
+    ),
   },
   {
     path: '/',
-    element: <HomePage />,
+    element: <HomePage />
   },
   {
     path: '*',
