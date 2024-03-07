@@ -1,4 +1,4 @@
-import store from './store/store';
+import { store, persiststor } from './store/store';
 import router from './router/router';
 
-export { store, router };
+export { router, store, persiststor };
