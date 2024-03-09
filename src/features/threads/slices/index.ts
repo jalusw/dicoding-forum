@@ -1,3 +1,4 @@
+import threadSlice from "./threadSlice";
 import threadsSlice from './threadsSlice';
 
-export { threadsSlice };
+export { threadsSlice, threadSlice };
