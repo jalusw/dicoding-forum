@@ -1,4 +1,4 @@
-import {  createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { User } from '../entities';
 import {
   authenticateUser,
@@ -38,7 +38,12 @@ const getAuthenticatedUserAsync = createAsyncThunk(
 const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.token = '';
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(registerUserAsync.pending, (state) => {
@@ -75,5 +80,6 @@ const authenticationSlice = createSlice({
       }),
 });
 
+export const { logout } = authenticationSlice.actions;
 export { registerUserAsync, authenticateUserAsync, getAuthenticatedUserAsync };
 export default authenticationSlice.reducer;
