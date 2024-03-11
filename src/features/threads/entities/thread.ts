@@ -1,4 +1,5 @@
 import { User } from '@/features/authentication/entities';
+import { Comment } from '.';
 
 interface Thread {
   id?: string;
@@ -10,6 +11,7 @@ interface Thread {
   owner?: User;
   upVotesBy?: string[];
   downVotesBy?: string[];
+  comments?: Comment[];
   totalComments?: number;
 }
 

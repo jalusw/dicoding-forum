@@ -3,13 +3,13 @@ import { Thread } from '../entities';
 import { getThread } from '../usecases';
 
 interface ThreadState {
-  thread: Thread | null;
+  thread: Thread;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: ThreadState = {
-  thread: null,
+  thread: {},
   status: 'idle',
   error: null,
 };
