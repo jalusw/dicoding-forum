@@ -7,6 +7,8 @@ import { Button } from '@/common/components/ui/button';
 import ThumbUpIcon from '@/common/components/icons/ThumbUpIcon';
 import ThumbDownIcon from '@/common/components/icons/ThumbDownIcon';
 import CommentIcon from '@/common/components/icons/CommentIcon';
+import UpVoteButton from '../reactions/UpVoteButton';
+import DownVoteButton from '../reactions/DownVoteButton';
 
 interface ThreadListItem {
   thread: Thread;
@@ -31,18 +33,12 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
       </section>
       <footer>
         <div className="flex flex-wrap gap-3">
-          <Button className="flex items-center" variant="outline">
-            <ThumbUpIcon />
-            <span className="ml-2">{thread.upVotesBy?.length ?? 0}</span>
-          </Button>
-          <Button className="flex items-center" variant="outline">
-            <ThumbDownIcon />
-            <span className="ml-2">{thread.downVotesBy?.length ?? 0}</span>
-          </Button>
-          <Button className="flex items-center" variant="outline">
+          <UpVoteButton thread={thread} />
+          <DownVoteButton thread={thread} />
+          <div className="flex items-center">
             <CommentIcon />
             <span className="ml-2">{thread.totalComments ?? 0}</span>
-          </Button>
+          </div>
         </div>
       </footer>
     </article>

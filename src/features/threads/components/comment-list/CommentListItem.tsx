@@ -24,7 +24,7 @@ const CommentListItem: FC<CommentListItemProps> = ({ comment }) => {
             src={avatar}
             alt=""
           />
-          <strong>{username},</strong>
+          <strong>{username}</strong>
         </div>
         <p>
           <span>{createdSince}</span>

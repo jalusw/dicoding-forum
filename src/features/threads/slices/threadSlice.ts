@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Thread } from '../entities';
 import { getThread } from '../usecases';
+import createComment from '../usecases/createComment';
 
 interface ThreadState {
   thread: Thread;
@@ -15,6 +16,11 @@ const initialState: ThreadState = {
 };
 
 const getThreadAsync = createAsyncThunk('thread/getThread', getThread);
+
+const createCommentAsync = createAsyncThunk(
+  'thread/createComment',
+  createComment,
+);
 
 const threadSlice = createSlice({
   name: 'thread',
@@ -32,8 +38,17 @@ const threadSlice = createSlice({
       .addCase(getThreadAsync.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(createCommentAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createCommentAsync.fulfilled, (state) => {
+        state.status = 'idle';
+      })
+      .addCase(createCommentAsync.rejected, (state) => {
+        state.error = 'failed';
       }),
 });
 
-export { getThreadAsync };
+export { getThreadAsync, createCommentAsync };
 export default threadSlice.reducer;
