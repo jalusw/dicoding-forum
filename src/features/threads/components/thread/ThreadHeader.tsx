@@ -12,7 +12,7 @@ const ThreadHeader: FC<ThreadHeaderProps> = ({ thread }) => {
   return (
     <header>
       <div className="container">
-        <div className=" prose py-16">
+        <div className="prose py-16">
           <Badge>{thread.category}</Badge>
           <h1 className="m-0 leading-snug">{thread?.title ?? ''}</h1>
           <div className="flex items-center space-x-4 py-4">
@@ -23,8 +23,8 @@ const ThreadHeader: FC<ThreadHeaderProps> = ({ thread }) => {
               src={thread?.owner?.avatar}
               alt=""
             />
-            <p className='m-0'>{thread?.owner?.name ?? ''},</p>
-            <p className='m-0'>{getTimeSinceCreation(parsedCreatedAt)}</p>
+            <p className="m-0">{thread?.owner?.name ?? ''},</p>
+            <p className="m-0">{getTimeSinceCreation(parsedCreatedAt)}</p>
           </div>
         </div>
       </div>
