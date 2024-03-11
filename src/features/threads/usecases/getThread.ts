@@ -1,4 +1,4 @@
-import { AxiosResponse, HttpStatusCode } from 'axios';
+import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
 import fetchThread from '../services/remote/fetchThread';
 
 const getThread = async (id: string) => {
@@ -18,7 +18,16 @@ const handleSuccess = (response: AxiosResponse) => {
 };
 
 const handleError = (error) => {
+  if (isAxiosError(error)) {
+    handleAxiosError(error);
+  }
   throw error;
+};
+
+const handleAxiosError = (error: AxiosError) => {
+  if (error.response?.status == HttpStatusCode.NotFound) {
+    throw Error('thread is not exist');
+  }
 };
 
 export default getThread;

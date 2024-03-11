@@ -29,8 +29,9 @@ const threadSlice = createSlice({
         state.status = 'succeeded';
         state.thread = action.payload;
       })
-      .addCase(getThreadAsync.rejected, (state) => {
+      .addCase(getThreadAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.error = action.error.message;
       }),
 });
 

@@ -9,6 +9,8 @@ import ThreadPageHeader from './ThreadPageHeader';
 import ThreadPageContainer from './ThreadPageContainer';
 import ThreadPageBody from './ThreadPageBody';
 import ThreadComments from './ThreadComments';
+import ThreadReaction from './ThreadReaction';
+import ThreadPageError from './ThreadPageError';
 
 const ThreadPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +26,10 @@ const ThreadPage: FC = () => {
     return <ThreadPageLoading />;
   }
 
+  if (threadRequestStatus === 'failed') {
+    return <ThreadPageError />;
+  }
+
   return (
     <>
       <Navbar />
@@ -31,6 +37,7 @@ const ThreadPage: FC = () => {
         <ThreadPageHeader thread={thread} />
         <main>
           <ThreadPageBody thread={thread} />
+          <ThreadReaction thread={thread} />
           <ThreadComments thread={thread} />
         </main>
       </ThreadPageContainer>
