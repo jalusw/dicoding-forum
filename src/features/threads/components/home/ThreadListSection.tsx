@@ -16,7 +16,7 @@ const ThreadListSection: FC = () => {
     return <p>Loading...</p>;
   }
 
-  return <ThreadList threads={threads}/>;
+  return <ThreadList threads={threads} />;
 };
 
 export default ThreadListSection;

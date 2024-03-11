@@ -1,4 +1,4 @@
-import { User } from "@/features/authentication/entities";
+import { User } from '@/features/authentication/entities';
 
 interface Thread {
   id?: string;

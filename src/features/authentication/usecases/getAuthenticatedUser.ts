@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
 import fetchAuthenticatedUser from '../services/remote/fetchAuthenticatedUser';
 
-const getAuthenticatedUser = async (token :string) => {
+const getAuthenticatedUser = async (token: string) => {
   try {
     const response = await fetchAuthenticatedUser(token);
     return handleSuccess(response);
