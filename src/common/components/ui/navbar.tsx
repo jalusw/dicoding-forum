@@ -9,7 +9,7 @@ import GuestWrapper from '../authentication/GuestWrapper';
 const Navbar: FC = () => {
   return (
     <nav className="py-4 shadow-border">
-      <div className="container  mx-auto flex justify-between">
+      <div className="container  mx-auto flex items-center justify-between">
         <NavbarBrand />
         <NavbarMenu />
       </div>
