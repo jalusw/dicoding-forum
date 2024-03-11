@@ -15,6 +15,7 @@ import { Input } from '@/common/components/ui/input';
 import { useAppDispatch } from '@/common/hooks';
 import { registerUserAsync } from '../../slices/authenticationSlice';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/common/components/ui/use-toast';
 
 const formSchema = z
   .object({
@@ -31,6 +32,7 @@ const formSchema = z
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {toast} = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -59,11 +61,20 @@ const RegisterForm: FC = () => {
   });
 
   const handleRegisterSuccess = () => {
+    toast({
+      title: "Success",
+      description: "User has been registered successfully",
+      variant: "default"
+    });
     navigate('/login');
   };
 
-  const handleRegisterFailed = (error) => {
-    alert(error.message);
+  const handleRegisterFailed = (error : unknown) => {
+    toast({
+      title: "Failed",
+      description: error.message,
+      variant: "destructive"
+    });
   };
 
   return (

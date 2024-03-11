@@ -1,7 +1,5 @@
 import { AxiosResponse, HttpStatusCode } from 'axios';
-import { postComment } from '../services';
-
-import { PostCommentArguments } from '../services/remote/postComment';
+import { PostCommentArguments, postComment } from '../services';
 
 const createComment = async (data: PostCommentArguments) => {
   try {
@@ -19,7 +17,7 @@ const handleSuccess = (response: AxiosResponse) => {
   return response.data;
 };
 
-const handleError = (error) => {
+const handleError = (error: unknown) => {
   throw error;
 };
 

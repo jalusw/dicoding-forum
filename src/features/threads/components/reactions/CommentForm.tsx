@@ -5,6 +5,7 @@ import { useAppDispatch, useAuth } from '@/common/hooks';
 import { useNavigate } from 'react-router-dom';
 import { createCommentAsync, getThreadAsync } from '../../slices/threadSlice';
 import { Thread } from '../../entities';
+import { useToast } from '@/common/components/ui/use-toast';
 
 interface CommentFormProps {
   thread: Thread;
@@ -13,6 +14,7 @@ interface CommentFormProps {
 const CommentForm: FC<CommentFormProps> = ({ thread }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const {toast} = useToast();
   const { isAuthenticated, token } = useAuth();
   const [comment, setComment] = useState('');
   const onSubmit = async (event: { preventDefault: () => void }) => {
@@ -33,7 +35,10 @@ const CommentForm: FC<CommentFormProps> = ({ thread }) => {
       );
       await dispatch(getThreadAsync(thread.id!));
     } catch (error) {
-      alert('Failed to post comment');
+      toast({
+        title: "Failed",
+        description: "Failed to create comment"
+      });
     }
   };
   return (

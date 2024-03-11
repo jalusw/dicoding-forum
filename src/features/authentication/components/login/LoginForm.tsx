@@ -18,6 +18,7 @@ import {
   getAuthenticatedUserAsync,
 } from '../../slices/authenticationSlice';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/common/components/ui/use-toast';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -27,6 +28,7 @@ const formSchema = z.object({
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate('/');
+  const {toast} = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,11 +52,19 @@ const LoginForm: FC = () => {
   };
 
   const handleSuccess = () => {
+    toast({
+      title: "Success",
+      description: "Login success, Welcome to dicoding forum."
+    });
     navigate('/');
   };
 
   const handleError = (error) => {
-    alert(error.message);
+    toast({
+      title: "Failed",
+      description: error.message,
+      variant: "destructive"
+    });
   };
 
   return (
