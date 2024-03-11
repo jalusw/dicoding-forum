@@ -5,6 +5,7 @@ import { getThreadAsync } from '../../slices/threadSlice';
 import parse from 'html-react-parser';
 
 import Navbar from '@/common/components/ui/navbar';
+import ThreadHeader from './ThreadHeader';
 
 const ThreadPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,26 +21,12 @@ const ThreadPage: FC = () => {
     return <p>Loading...</p>;
   }
 
+
+
   return (
     <>
       <Navbar />
-      <header>
-        <div className="container">
-          <div className=" prose py-16 ">
-            <h1 className="m-0 leading-snug">{thread?.title ?? ''}</h1>
-            <div className="flex items-center space-x-4">
-              <img
-                className="rounded-full "
-                width="40"
-                height="40"
-                src={thread?.owner?.avatar}
-                alt=""
-              />
-              <p>Oleh, {thread?.owner?.name ?? ''}</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      <ThreadHeader thread={thread!}/>
       <main id="main">
         <div className="container">
           <div className="prose">{parse(thread?.body ?? '')}</div>

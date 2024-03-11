@@ -4,7 +4,7 @@ import { fetchThreads } from '../services';
 const getThreads = async () => {
   try {
     const response = await fetchThreads();
-    handleSuccess(response);
+    return handleSuccess(response);
   } catch (error) {
     handleError(error);
   }
