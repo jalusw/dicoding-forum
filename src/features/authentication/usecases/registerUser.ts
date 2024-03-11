@@ -11,13 +11,13 @@ const registerUser = async (userData) => {
 };
 
 const handleSuccess = (response: AxiosResponse) => {
-  if (response.status != HttpStatusCode.Created) {
+  if (response.status !== HttpStatusCode.Created) {
     throw Error('Failed to create user');
   }
   return response.data.data;
 };
 
-const handleError = (error: any) => {
+const handleError = (error) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

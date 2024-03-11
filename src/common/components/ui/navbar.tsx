@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/common/hooks';
+import { useAppDispatch } from '@/common/hooks';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './button';

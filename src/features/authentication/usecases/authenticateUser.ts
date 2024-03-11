@@ -4,20 +4,20 @@ import { postLogin } from '../services';
 const authenticateUser = async (credentials) => {
   try {
     const response = await postLogin(credentials);
-    return response.data;
+    return handleSuccess(response);
   } catch (error) {
     handleError(error);
   }
 };
 
 const handleSuccess = (response: AxiosResponse) => {
-  if (response.status != HttpStatusCode.Ok) {
+  if (response.status !== HttpStatusCode.Ok) {
     throw Error('Failed to authenticate');
   }
-  return response.data.data;
+  return response.data;
 };
 
-const handleError = (error: any) => {
+const handleError = (error) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

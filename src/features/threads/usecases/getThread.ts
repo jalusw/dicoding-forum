@@ -1,16 +1,24 @@
-import { HttpStatusCode } from 'axios';
+import { AxiosResponse, HttpStatusCode } from 'axios';
 import fetchThread from '../services/remote/fetchThread';
 
-const getThread = async (id) => {
+const getThread = async (id: string) => {
   try {
     const response = await fetchThread(id);
-    if (response.status != HttpStatusCode.Ok) {
-      throw Error('Failed to fetch thread');
-    }
-    return response.data.data.detailThread;
+    return handleSuccess(response);
   } catch (error) {
-    throw error;
+    handleError(error);
   }
+};
+
+const handleSuccess = (response: AxiosResponse) => {
+  if (response.status !== HttpStatusCode.Ok) {
+    throw Error('Failed to fetch thread');
+  }
+  return response.data.data.detailThread;
+};
+
+const handleError = (error) => {
+  throw error;
 };
 
 export default getThread;

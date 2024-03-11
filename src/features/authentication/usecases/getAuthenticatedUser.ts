@@ -11,13 +11,13 @@ const getAuthenticatedUser = async (token: string) => {
 };
 
 const handleSuccess = (response: AxiosResponse) => {
-  if (response.status != HttpStatusCode.Ok) {
+  if (response.status !== HttpStatusCode.Ok) {
     throw Error('Failed to get authenticated user data');
   }
   return response.data.data;
 };
 
-const handleError = (error: any) => {
+const handleError = (error) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }
