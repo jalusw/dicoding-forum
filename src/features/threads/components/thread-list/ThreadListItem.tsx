@@ -1,18 +1,23 @@
 import { FC } from 'react';
 import { Thread } from '../../entities';
-import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/common/components/ui/badge';
-import { Button } from '@/common/components/ui/button';
-import ThumbUpIcon from '@/common/components/icons/ThumbUpIcon';
-import ThumbDownIcon from '@/common/components/icons/ThumbDownIcon';
 import CommentIcon from '@/common/components/icons/CommentIcon';
+import UpVoteButton from '../reactions/UpVoteButton';
+import DownVoteButton from '../reactions/DownVoteButton';
+import parse from 'html-react-parser';
+import { useAppSelector } from '@/common/hooks';
+import { getTimeSinceCreation } from '@/common/utils/datetime';
 
 interface ThreadListItem {
   thread: Thread;
 }
 
 const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
+  const users = useAppSelector((state) => state.users.users);
+  const user = users[thread.ownerId];
+  const createdAt = new Date(thread.createdAt);
+  const createdSince = getTimeSinceCreation(createdAt);
   return (
     <article className="prose max-w-full rounded-xl p-6 shadow-border">
       <header>
@@ -22,7 +27,18 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
         <Link to={`/thread/${thread.id}`}>
           <strong className="m-0 text-lg">{thread.title}</strong>
         </Link>
-        <p className="m-0">Oleh, {thread.ownerId}</p>
+        <div className="mt-2 flex items-center space-x-2">
+          <img
+            className="m-0 rounded-full"
+            width="25"
+            height="25"
+            src={user.avatar}
+            alt=""
+          />
+          <p className="m-0">
+            <span className="font-bold">{user.name}</span>, {createdSince}
+          </p>
+        </div>
       </header>
       <section>
         <p className="line-clamp-6 leading-relaxed">
@@ -31,22 +47,24 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
       </section>
       <footer>
         <div className="flex flex-wrap gap-3">
-          <Button className="flex items-center" variant="outline">
-            <ThumbUpIcon />
-            <span className="ml-2">{thread.upVotesBy?.length ?? 0}</span>
-          </Button>
-          <Button className="flex items-center" variant="outline">
-            <ThumbDownIcon />
-            <span className="ml-2">{thread.downVotesBy?.length ?? 0}</span>
-          </Button>
-          <Button className="flex items-center" variant="outline">
+          <UpVoteButton thread={thread} />
+          <DownVoteButton thread={thread} />
+          <div className="flex items-center">
             <CommentIcon />
             <span className="ml-2">{thread.totalComments ?? 0}</span>
-          </Button>
+          </div>
         </div>
       </footer>
     </article>
   );
+};
+
+interface OwnerThreadProps {
+  ownerId: string;
+}
+
+const OwnerThread: FC<OwnerThreadProps> = ({ ownerId }) => {
+  return <></>;
 };
 
 export default ThreadListItem;

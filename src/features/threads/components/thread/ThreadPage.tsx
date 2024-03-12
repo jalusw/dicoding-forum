@@ -2,9 +2,15 @@ import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/common/hooks';
 import { useParams } from 'react-router-dom';
 import { getThreadAsync } from '../../slices/threadSlice';
-import parse from 'html-react-parser';
 
 import Navbar from '@/common/components/ui/navbar';
+import ThreadPageLoading from './ThreadPageLoading';
+import ThreadPageHeader from './ThreadPageHeader';
+import ThreadPageContainer from './ThreadPageContainer';
+import ThreadPageBody from './ThreadPageBody';
+import ThreadComments from './ThreadComments';
+import ThreadReaction from './ThreadReaction';
+import ThreadPageError from './ThreadPageError';
 
 const ThreadPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -13,38 +19,28 @@ const ThreadPage: FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getThreadAsync(id));
+    dispatch(getThreadAsync(id!));
   }, []);
 
   if (threadRequestStatus === 'loading') {
-    return <p>Loading...</p>;
+    return <ThreadPageLoading />;
+  }
+
+  if (threadRequestStatus === 'failed') {
+    return <ThreadPageError />;
   }
 
   return (
     <>
       <Navbar />
-      <header>
-        <div className="container">
-          <div className=" prose py-16 ">
-            <h1 className="m-0 leading-snug">{thread?.title ?? ''}</h1>
-            <div className="flex items-center space-x-4">
-              <img
-                className="rounded-full "
-                width="40"
-                height="40"
-                src={thread?.owner?.avatar}
-                alt=""
-              />
-              <p>Oleh, {thread?.owner?.name ?? ''}</p>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main id="main">
-        <div className="container">
-          <div className="prose">{parse(thread?.body ?? '')}</div>
-        </div>
-      </main>
+      <ThreadPageContainer>
+        <ThreadPageHeader thread={thread} />
+        <main>
+          <ThreadPageBody thread={thread} />
+          <ThreadReaction thread={thread} />
+          <ThreadComments thread={thread} />
+        </main>
+      </ThreadPageContainer>
     </>
   );
 };

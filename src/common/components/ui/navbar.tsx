@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/common/hooks';
+import { useAppDispatch } from '@/common/hooks';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './button';
@@ -9,7 +9,7 @@ import GuestWrapper from '../authentication/GuestWrapper';
 const Navbar: FC = () => {
   return (
     <nav className="py-4 shadow-border">
-      <div className="container  mx-auto flex justify-between">
+      <div className="container  mx-auto flex items-center justify-between">
         <NavbarBrand />
         <NavbarMenu />
       </div>
@@ -25,7 +25,7 @@ const NavbarBrand: FC = () => (
 
 const NavbarMenu: FC = () => {
   return (
-    <ul className='flex items-center space-x-4'>
+    <ul className="flex items-center space-x-4">
       <li>
         <Link to="/">Home</Link>
       </li>

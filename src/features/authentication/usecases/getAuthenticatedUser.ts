@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
-import fetchAuthenticatedUser from '../services/remote/fetchAuthenticatedUser';
+import { fetchAuthenticatedUser } from '../services';
 
-const getAuthenticatedUser = async (token :string) => {
+const getAuthenticatedUser = async (token: string) => {
   try {
     const response = await fetchAuthenticatedUser(token);
     return handleSuccess(response);
@@ -11,13 +11,13 @@ const getAuthenticatedUser = async (token :string) => {
 };
 
 const handleSuccess = (response: AxiosResponse) => {
-  if (response.status != HttpStatusCode.Ok) {
+  if (response.status !== HttpStatusCode.Ok) {
     throw Error('Failed to get authenticated user data');
   }
   return response.data.data;
 };
 
-const handleError = (error: any) => {
+const handleError = (error: unknown) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

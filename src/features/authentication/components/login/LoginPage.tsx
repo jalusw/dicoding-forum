@@ -11,7 +11,7 @@ const LoginPage: FC = () => {
         <section className="mt-4">
           <LoginForm />
         </section>
-        <section className='mt-8'>
+        <section className="mt-8">
           <Link to="/register">Don't have any account ?</Link>
         </section>
       </div>

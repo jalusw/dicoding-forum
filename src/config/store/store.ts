@@ -1,7 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { threadsSlice,threadSlice } from '@/features/threads/slices';
-import { authenticationSlice } from '@/features/authentication/slices';
+import { threadsSlice, threadSlice } from '@/features/threads/slices';
+import {
+  authenticationSlice,
+  usersSlice,
+} from '@/features/authentication/slices';
 
 import {
   persistStore,
@@ -23,8 +26,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   authentication: authenticationSlice,
+  users: usersSlice,
   threads: threadsSlice,
-  thread: threadSlice
+  thread: threadSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

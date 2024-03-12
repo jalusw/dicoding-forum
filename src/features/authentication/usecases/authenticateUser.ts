@@ -1,23 +1,23 @@
-import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from "axios";
-import { postLogin } from "../services"
+import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
+import { postLogin } from '../services';
 
 const authenticateUser = async (credentials) => {
-  try{
+  try {
     const response = await postLogin(credentials);
-    return response.data;
-  }catch(error){
+    return handleSuccess(response);
+  } catch (error) {
     handleError(error);
   }
-}
+};
 
-const handleSuccess = (response : AxiosResponse) => {
-  if(response.status != HttpStatusCode.Ok){
-    throw Error("Failed to authenticate");
+const handleSuccess = (response: AxiosResponse) => {
+  if (response.status !== HttpStatusCode.Ok) {
+    throw Error('Failed to authenticate');
   }
-  return response.data.data;
-}
+  return response.data;
+};
 
-const handleError = (error: any) => {
+const handleError = (error) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

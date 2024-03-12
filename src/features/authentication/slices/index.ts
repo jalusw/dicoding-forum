@@ -1,3 +1,4 @@
 import authenticationSlice from './authenticationSlice';
+import usersSlice from './usersSlice';
 
-export { authenticationSlice };
+export { authenticationSlice, usersSlice };

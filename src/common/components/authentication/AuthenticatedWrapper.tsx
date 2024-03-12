@@ -1,22 +1,18 @@
-import { useAppSelector } from "@/common/hooks";
-import { FC, ReactElement } from "react"
+import { useAuth } from '@/common/hooks';
+import { FC, ReactElement } from 'react';
 
-interface AuthenticatedWrapperProps{
+interface AuthenticatedWrapperProps {
   children: ReactElement;
 }
 
-const AuthenticatedWrapper :  FC<AuthenticatedWrapperProps> = ({children}) => {
-  const token = useAppSelector(state => state.authentication.token);
-  const user = useAppSelector(state => state.authentication.user);
+const AuthenticatedWrapper: FC<AuthenticatedWrapperProps> = ({ children }) => {
+  const { isAuthenticated } = useAuth();
 
-  const trimmedToken = token.trim();
-  const trimmedTokenLength = trimmedToken.length;
-
-  if(trimmedTokenLength === 0 && user === null){
+  if (!isAuthenticated) {
     return <></>;
   }
-  
+
   return children;
-}
+};
 
 export default AuthenticatedWrapper;
