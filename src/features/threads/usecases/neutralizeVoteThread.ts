@@ -1,12 +1,12 @@
 import { AxiosError, AxiosResponse, isAxiosError } from 'axios';
-import { PostDownVoteThreadArguments, postDownVoteThread } from '../services';
+import { PostNeutralizeThread, postNeutralizeThread } from '../services';
 
 const neutralizeVoteThread = async ({
   threadId,
   authToken,
-}: PostDownVoteThreadArguments) => {
+}: PostNeutralizeThread) => {
   try {
-    const response = await postDownVoteThread({ threadId, authToken });
+    const response = await postNeutralizeThread({ threadId, authToken });
     return handleSuccess(response);
   } catch (error) {
     handleError(error);
@@ -17,7 +17,7 @@ const handleSuccess = (response: AxiosResponse) => {
   return response.data.data;
 };
 
-const handleError = (error) => {
+const handleError = (error: unknown) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

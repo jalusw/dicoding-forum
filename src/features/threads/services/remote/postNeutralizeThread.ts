@@ -1,6 +1,6 @@
 import client from '@/core/api/client';
 
-export interface PostDownVoteThreadArguments {
+export interface PostNeutralizeThread {
   threadId: string;
   authToken: string;
 }
@@ -8,7 +8,7 @@ export interface PostDownVoteThreadArguments {
 const postNeutralizeThread = async ({
   threadId,
   authToken,
-}: PostDownVoteThreadArguments) => {
+}: PostNeutralizeThread) => {
   return await client.post(
     `threads/${threadId}/neutral-vote`,
     {},

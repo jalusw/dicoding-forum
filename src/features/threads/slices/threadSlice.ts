@@ -1,9 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Thread } from '../entities';
-import { getThread } from '../usecases';
-import createComment from '../usecases/createComment';
-import downVoteThread from '../usecases/downVoteThread';
-import neutralizeVoteThread from '../usecases/neutralizeVoteThread';
+import {
+  getThread,
+  createComment,
+  downVoteThread,
+  neutralizeVoteThread,
+  upVoteThread,
+} from '../usecases';
 
 interface ThreadState {
   thread: Thread;
@@ -26,6 +29,8 @@ const createCommentAsync = createAsyncThunk(
 
 const downVoteThreadAsync = createAsyncThunk('thread/downVote', downVoteThread);
 
+const upVoteThreadAsync = createAsyncThunk('thread/upVote', upVoteThread);
+
 const neutralizeVoteThreadAsync = createAsyncThunk(
   'thread/neutralize',
   neutralizeVoteThread,
@@ -44,11 +49,6 @@ const threadSlice = createSlice({
       );
     },
     appendUpVote: (state, action) => {
-      if (
-        state.thread.upVotesBy!.filter((userId) => userId === action.payload)
-      ) {
-        return;
-      }
       state.thread.upVotesBy = [...state.thread.upVotesBy!, action.payload];
     },
     removeUpVote: (state, action) => {
@@ -92,6 +92,7 @@ export {
   getThreadAsync,
   createCommentAsync,
   downVoteThreadAsync,
+  upVoteThreadAsync,
   neutralizeVoteThreadAsync,
 };
 export default threadSlice.reducer;

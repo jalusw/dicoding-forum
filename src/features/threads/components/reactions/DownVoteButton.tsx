@@ -12,6 +12,7 @@ import {
   downVoteThreadAsync,
   neutralizeVoteThreadAsync,
   removeDownVote,
+  removeUpVote,
 } from '../../slices/threadSlice';
 import { toast } from '@/common/components/ui/use-toast';
 
@@ -95,6 +96,7 @@ const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({
   const onClick = async () => {
     try {
       dispatch(appendDownVote(user!.id));
+      dispatch(removeUpVote(user!.id));
       await dispatch(
         downVoteThreadAsync({
           threadId: thread.id!,
