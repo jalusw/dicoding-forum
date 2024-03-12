@@ -6,6 +6,7 @@ import {
   downVoteThread,
   neutralizeVoteThread,
   upVoteThread,
+  createThread,
 } from '../usecases';
 
 interface ThreadState {
@@ -20,7 +21,7 @@ const initialState: ThreadState = {
   error: null,
 };
 
-const getThreadAsync = createAsyncThunk('thread/getThread', getThread);
+const getThreadAsync = createAsyncThunk('thread/get', getThread);
 
 const createCommentAsync = createAsyncThunk(
   'thread/createComment',
@@ -35,6 +36,8 @@ const neutralizeVoteThreadAsync = createAsyncThunk(
   'thread/neutralize',
   neutralizeVoteThread,
 );
+
+const createThreadAsync = createAsyncThunk('thread/create', createThread);
 
 const threadSlice = createSlice({
   name: 'thread',
@@ -94,5 +97,6 @@ export {
   downVoteThreadAsync,
   upVoteThreadAsync,
   neutralizeVoteThreadAsync,
+  createThreadAsync,
 };
 export default threadSlice.reducer;

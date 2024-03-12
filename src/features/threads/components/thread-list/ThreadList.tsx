@@ -8,7 +8,7 @@ interface ThreadListProps {
 
 const ThreadList: FC<ThreadListProps> = ({ threads }) => {
   return (
-    <div className="max-w-screen-sm space-y-8">
+    <div className="space-y-8">
       {threads.map((thread) => (
         <ThreadListItem key={thread.id} thread={thread} />
       ))}

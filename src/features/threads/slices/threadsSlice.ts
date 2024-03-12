@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Thread } from '../entities';
-import { getThreads } from '../usecases';
+import { getThread, getThreads } from '../usecases';
 
 interface ThreadsState {
   threads: Thread[];
@@ -15,14 +15,23 @@ const initialState: ThreadsState = {
 };
 
 const getThreadsAsync = createAsyncThunk<Thread[], void>(
-  'threads/getThreads',
+  'threads/get',
   getThreads,
 );
 
 const threadsSlice = createSlice({
   name: 'threads',
   initialState,
-  reducers: {},
+  reducers: {
+    appendThread: (state, action) => {
+      state.threads = [action.payload, ...state.threads];
+    },
+    removeThread: (state, action) => {
+      state.threads = state.threads.filter(
+        (thread) => thread.id !== action.payload,
+      );
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getThreadsAsync.pending, (state) => {
@@ -41,5 +50,6 @@ const threadsSlice = createSlice({
       }),
 });
 
+export const { appendThread ,removeThread} = threadsSlice.actions;
 export { getThreadsAsync };
 export default threadsSlice.reducer;
