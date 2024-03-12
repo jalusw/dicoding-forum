@@ -28,7 +28,7 @@ const formSchema = z.object({
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,17 +53,17 @@ const LoginForm: FC = () => {
 
   const handleSuccess = () => {
     toast({
-      title: "Success",
-      description: "Login success, Welcome to dicoding forum."
+      title: 'Success',
+      description: 'Login success, Welcome to dicoding forum.',
     });
     navigate('/');
   };
 
   const handleError = (error) => {
     toast({
-      title: "Failed",
+      title: 'Failed',
       description: error.message,
-      variant: "destructive"
+      variant: 'destructive',
     });
   };
 

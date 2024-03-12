@@ -8,7 +8,6 @@ import { persiststor, router, store } from '@/config';
 import { Toaster } from '@/common/components/ui/toaster';
 import '@/common/styles/index.css';
 
-
 const targetRootElement = document.querySelector('#root')!;
 const reactroot = createRoot(targetRootElement);
 
@@ -17,7 +16,7 @@ reactroot.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persiststor}>
         <RouterProvider router={router} />
-        <Toaster/>
+        <Toaster />
       </PersistGate>
     </Provider>
   </StrictMode>,

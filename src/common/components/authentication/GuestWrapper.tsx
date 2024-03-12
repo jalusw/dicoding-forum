@@ -1,4 +1,4 @@
-import { useAppSelector, useAuth } from '@/common/hooks';
+import { useAuth } from '@/common/hooks';
 import { FC, ReactElement } from 'react';
 
 interface GuestWrapperProps {

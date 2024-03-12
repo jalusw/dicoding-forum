@@ -25,7 +25,7 @@ const handleError = (error) => {
 };
 
 const handleAxiosError = (error: AxiosError) => {
-  if (error.response?.status == HttpStatusCode.NotFound) {
+  if (error.response?.status === HttpStatusCode.NotFound) {
     throw Error('thread is not exist');
   }
 };

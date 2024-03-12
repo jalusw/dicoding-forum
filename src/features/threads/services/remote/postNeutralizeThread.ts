@@ -5,12 +5,12 @@ export interface PostDownVoteThreadArguments {
   authToken: string;
 }
 
-const postDownVoteThread = async ({
+const postNeutralizeThread = async ({
   threadId,
   authToken,
 }: PostDownVoteThreadArguments) => {
   return await client.post(
-    `threads/${threadId}/down-vote`,
+    `threads/${threadId}/neutral-vote`,
     {},
     {
       headers: {
@@ -20,4 +20,4 @@ const postDownVoteThread = async ({
   );
 };
 
-export default postDownVoteThread;
+export default postNeutralizeThread;

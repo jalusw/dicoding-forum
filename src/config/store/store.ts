@@ -24,7 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   authentication: authenticationSlice,
   threads: threadsSlice,
-  thread:  threadSlice,
+  thread: threadSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

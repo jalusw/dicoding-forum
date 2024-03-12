@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse, isAxiosError } from 'axios';
 import { PostDownVoteThreadArguments, postDownVoteThread } from '../services';
 
-const downVoteThread = async ({
+const neutralizeVoteThread = async ({
   threadId,
   authToken,
 }: PostDownVoteThreadArguments) => {
@@ -21,7 +21,7 @@ const handleError = (error) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }
-  throw Error('failed to down vote');
+  throw Error('failed to neutralize vote');
 };
 
 const handleAxiosError = (error: AxiosError) => {
@@ -30,4 +30,4 @@ const handleAxiosError = (error: AxiosError) => {
   }
 };
 
-export default downVoteThread;
+export default neutralizeVoteThread;

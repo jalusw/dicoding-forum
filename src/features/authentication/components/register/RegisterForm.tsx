@@ -32,7 +32,7 @@ const formSchema = z
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,18 +62,18 @@ const RegisterForm: FC = () => {
 
   const handleRegisterSuccess = () => {
     toast({
-      title: "Success",
-      description: "User has been registered successfully",
-      variant: "default"
+      title: 'Success',
+      description: 'User has been registered successfully',
+      variant: 'default',
     });
     navigate('/login');
   };
 
-  const handleRegisterFailed = (error : unknown) => {
+  const handleRegisterFailed = (error: unknown) => {
     toast({
-      title: "Failed",
+      title: 'Failed',
       description: error.message,
-      variant: "destructive"
+      variant: 'destructive',
     });
   };
 

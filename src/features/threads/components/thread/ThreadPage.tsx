@@ -11,15 +11,12 @@ import ThreadPageBody from './ThreadPageBody';
 import ThreadComments from './ThreadComments';
 import ThreadReaction from './ThreadReaction';
 import ThreadPageError from './ThreadPageError';
-import { useToast } from '@/common/components/ui/use-toast';
 
 const ThreadPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { toast } = useToast();
   const threadRequestStatus = useAppSelector((state) => state.thread.status);
   const thread = useAppSelector((state) => state.thread.thread);
   const { id } = useParams();
-
 
   useEffect(() => {
     dispatch(getThreadAsync(id!));
