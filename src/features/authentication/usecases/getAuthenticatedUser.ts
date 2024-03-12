@@ -17,7 +17,7 @@ const handleSuccess = (response: AxiosResponse) => {
   return response.data.data;
 };
 
-const handleError = (error) => {
+const handleError = (error: unknown) => {
   if (isAxiosError(error)) {
     handleAxiosError(error);
   }

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Thread } from '../entities';
 import { getThread } from '../usecases';
 import createComment from '../usecases/createComment';
+import downVoteThread from '../usecases/downVoteThread';
 
 interface ThreadState {
   thread: Thread;
@@ -22,10 +23,19 @@ const createCommentAsync = createAsyncThunk(
   createComment,
 );
 
+const downVoteThreadAsync = createAsyncThunk('thread/downVote', downVoteThread);
+
 const threadSlice = createSlice({
   name: 'thread',
   initialState,
-  reducers: {},
+  reducers: {
+    appendComment: (state, action) => {
+      state.thread.comments = [action.payload,...state.thread.comments!];
+    },
+    removeComment: (state,action) => {
+      state.thread.comments = state.thread.comments!.filter(comment => comment.id !== action.payload);
+    }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getThreadAsync.pending, (state) => {
@@ -37,18 +47,12 @@ const threadSlice = createSlice({
       })
       .addCase(getThreadAsync.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.error.message ?? "Failed to get thread";
       })
-      .addCase(createCommentAsync.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(createCommentAsync.fulfilled, (state) => {
-        state.status = 'idle';
-      })
-      .addCase(createCommentAsync.rejected, (state) => {
-        state.error = 'failed';
-      }),
 });
 
-export { getThreadAsync, createCommentAsync };
-export default threadSlice.reducer;
+
+
+export const { appendComment, removeComment } = threadSlice.actions;
+export { getThreadAsync, createCommentAsync, downVoteThreadAsync };
+export default  threadSlice.reducer;

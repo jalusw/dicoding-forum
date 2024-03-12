@@ -10,7 +10,7 @@ const CommentList: FC<CommentListProps> = ({ comments }) => {
   return (
     <div className="space-y-8">
       {comments.map((comment) => (
-        <CommentListItem comment={comment} />
+        <CommentListItem key={comment.id} comment={comment} />
       ))}
     </div>
   );

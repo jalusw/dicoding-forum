@@ -10,7 +10,7 @@ const ThreadList: FC<ThreadListProps> = ({ threads }) => {
   return (
     <div className="max-w-screen-sm space-y-8">
       {threads.map((thread) => (
-        <ThreadListItem thread={thread} />
+        <ThreadListItem key={thread.id} thread={thread} />
       ))}
     </div>
   );
