@@ -14,7 +14,7 @@ const ThreadPageHeader: FC<ThreadPageHeaderProps> = ({ thread }) => {
   return (
     <header>
       <div className="prose max-w-full">
-        <Badge>{thread.category}</Badge>
+        <Badge># {thread.category}</Badge>
         <h1 className="m-0 leading-snug">{thread.title}</h1>
         <div className="flex items-center space-x-2">
           <img

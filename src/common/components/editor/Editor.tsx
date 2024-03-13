@@ -3,10 +3,11 @@ import { FC } from 'react';
 
 interface EditorProps {
   className?: string;
+  value?: string;
   onChange?: (event: React.FormEvent<HTMLDivElement>) => void;
 }
 
-const Editor: FC<EditorProps> = ({ className, onChange }) => {
+const Editor: FC<EditorProps> = ({ className, value = '', onChange }) => {
   const baseStyles =
     'h-[100px] w-full overflow-y-scroll rounded-md p-2 shadow-border';
   return (
@@ -15,7 +16,9 @@ const Editor: FC<EditorProps> = ({ className, onChange }) => {
       onInput={onChange}
       role="textbox"
       contentEditable
-    ></div>
+    >
+      {value}
+    </div>
   );
 };
 

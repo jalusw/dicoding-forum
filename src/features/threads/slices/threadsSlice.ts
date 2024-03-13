@@ -6,23 +6,41 @@ interface ThreadsState {
   threads: Thread[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  filter: {
+    category: string | null;
+  };
 }
 
 const initialState: ThreadsState = {
   threads: [],
   status: 'idle',
   error: null,
+  filter: {
+    category: null,
+  },
 };
 
 const getThreadsAsync = createAsyncThunk<Thread[], void>(
-  'threads/getThreads',
+  'threads/get',
   getThreads,
 );
 
 const threadsSlice = createSlice({
   name: 'threads',
   initialState,
-  reducers: {},
+  reducers: {
+    appendThread: (state, action) => {
+      state.threads = [action.payload, ...state.threads];
+    },
+    removeThread: (state, action) => {
+      state.threads = state.threads.filter(
+        (thread) => thread.id !== action.payload,
+      );
+    },
+    setCategoryFilter: (state, action) => {
+      state.filter.category = action.payload;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getThreadsAsync.pending, (state) => {
@@ -41,5 +59,7 @@ const threadsSlice = createSlice({
       }),
 });
 
+export const { appendThread, removeThread, setCategoryFilter } =
+  threadsSlice.actions;
 export { getThreadsAsync };
 export default threadsSlice.reducer;

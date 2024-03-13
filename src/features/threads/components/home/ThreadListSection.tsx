@@ -8,6 +8,7 @@ const ThreadListSection: FC = () => {
   const dispatch = useAppDispatch();
   const threads = useAppSelector((state) => state.threads.threads);
   const threadsRequestStatus = useAppSelector((state) => state.threads.status);
+  const threadsFilter = useAppSelector((state) => state.threads.filter);
   const usersRequestStatus = useAppSelector((state) => state.users.status);
 
   useEffect(() => {
@@ -17,6 +18,13 @@ const ThreadListSection: FC = () => {
 
   if (threadsRequestStatus === 'loading' || usersRequestStatus === 'loading') {
     return <p>Loading...</p>;
+  }
+
+  if (threadsFilter.category !== null) {
+    const filteredThreads = threads.filter(
+      (thread) => thread.category === threadsFilter.category,
+    );
+    return <ThreadList threads={filteredThreads} />;
   }
 
   return <ThreadList threads={threads} />;

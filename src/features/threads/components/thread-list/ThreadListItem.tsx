@@ -22,7 +22,7 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
     <article className="prose max-w-full rounded-xl p-6 shadow-border">
       <header>
         <div className="mb-4 flex">
-          <Badge>{thread.category}</Badge>
+          <Badge variant="outline"># {thread.category}</Badge>
         </div>
         <Link to={`/thread/${thread.id}`}>
           <strong className="m-0 text-lg">{thread.title}</strong>
