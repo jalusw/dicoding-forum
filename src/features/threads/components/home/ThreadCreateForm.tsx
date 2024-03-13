@@ -63,7 +63,7 @@ const ThreadCreateForm: FC = () => {
           thread: values,
           authToken: token,
         }),
-      );
+      ).unwrap();
       toast({
         title: 'Success',
         description: 'Thread created successfully',
