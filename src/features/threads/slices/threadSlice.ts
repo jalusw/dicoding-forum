@@ -17,7 +17,7 @@ interface ThreadState {
 
 const initialState: ThreadState = {
   thread: {},
-  status: 'idle',
+  status: 'loading',
   error: null,
 };
 

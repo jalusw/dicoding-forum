@@ -2,7 +2,7 @@ import { useAuth } from '@/common/hooks';
 import { FC, ReactElement } from 'react';
 
 interface AuthenticatedWrapperProps {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 const AuthenticatedWrapper: FC<AuthenticatedWrapperProps> = ({ children }) => {

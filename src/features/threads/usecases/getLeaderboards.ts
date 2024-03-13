@@ -1,9 +1,9 @@
 import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
-import {fetchThread} from '../services';
+import { fetchLeaderboards } from '../services';
 
-const getThread = async (id: string) => {
+const getLeaderboards = async () => {
   try {
-    const response = await fetchThread(id);
+    const response = await fetchLeaderboards();
     return handleSuccess(response);
   } catch (error) {
     handleError(error);
@@ -12,9 +12,9 @@ const getThread = async (id: string) => {
 
 const handleSuccess = (response: AxiosResponse) => {
   if (response.status !== HttpStatusCode.Ok) {
-    throw Error('Failed to fetch thread');
+    throw Error('Failed to fetch leaderboards');
   }
-  return response.data.data.detailThread;
+  return response.data.data;
 };
 
 const handleError = (error) => {
@@ -25,9 +25,9 @@ const handleError = (error) => {
 };
 
 const handleAxiosError = (error: AxiosError) => {
-  if (error.response?.status === HttpStatusCode.NotFound) {
-    throw Error('thread is not exist');
+  if(error.response){
+    throw Error(error.response.data.message);
   }
 };
 
-export default getThread;
+export default getLeaderboards;
