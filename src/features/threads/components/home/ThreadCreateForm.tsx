@@ -55,6 +55,7 @@ const ThreadCreateForm: FC = () => {
           downVotesBy: [],
           createdAt: currentDatetime,
           ...values,
+          category: values.category === '' ? 'general' : values.category
         }),
       );
       await dispatch(

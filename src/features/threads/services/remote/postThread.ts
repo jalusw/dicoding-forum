@@ -3,7 +3,7 @@ import client from '@/core/api/client';
 export interface PostThreadPayload {
   title: string;
   body: string;
-  category?: string;
+  category: string | null;
 }
 
 export interface PostThreadArguments {
