@@ -3,6 +3,7 @@ import ThreadCreateSection from './ThreadCreateSection';
 import ThreadListSection from './ThreadListSection';
 import Navbar from '@/common/components/ui/navbar';
 import AuthenticatedWrapper from '@/common/components/authentication/AuthenticatedWrapper';
+import ThreadsFilter from './ThreadsFilter';
 
 const HomePage: FC = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage: FC = () => {
                 <AuthenticatedWrapper>
                   <ThreadCreateSection />
                 </AuthenticatedWrapper>
+                <ThreadsFilter/>
               </div>
             </div>
           </div>

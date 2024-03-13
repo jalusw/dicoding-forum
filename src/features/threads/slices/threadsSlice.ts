@@ -1,17 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Thread } from '../entities';
-import { getThread, getThreads } from '../usecases';
+import { getThreads } from '../usecases';
 
 interface ThreadsState {
   threads: Thread[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  filter: {
+    category: string | null;
+  };
 }
 
 const initialState: ThreadsState = {
   threads: [],
   status: 'idle',
   error: null,
+  filter: {
+    category: null,
+  },
 };
 
 const getThreadsAsync = createAsyncThunk<Thread[], void>(
@@ -30,6 +36,9 @@ const threadsSlice = createSlice({
       state.threads = state.threads.filter(
         (thread) => thread.id !== action.payload,
       );
+    },
+    setCategoryFilter: (state, action) => {
+      state.filter.category = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -50,6 +59,7 @@ const threadsSlice = createSlice({
       }),
 });
 
-export const { appendThread ,removeThread} = threadsSlice.actions;
+export const { appendThread, removeThread, setCategoryFilter } =
+  threadsSlice.actions;
 export { getThreadsAsync };
 export default threadsSlice.reducer;

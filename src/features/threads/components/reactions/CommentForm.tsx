@@ -49,6 +49,7 @@ const CommentForm: FC<CommentFormProps> = ({ thread }) => {
 
       dispatch(appendComment(appendCommentPayload));
       await dispatch(createCommentAsync(createCommentPayload));
+      setComment("");
     } catch (error) {
       dispatch(removeComment(commentId));
       toast({

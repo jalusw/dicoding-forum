@@ -9,7 +9,7 @@ import { Input } from '@/common/components/ui/input';
 import ThreadCreateForm from './ThreadCreateForm';
 const ThreadCreateSection: FC = () => {
   return (
-    <section>
+    <section className='mb-4'>
       <Dialog>
         <DialogTrigger asChild>
           <Input value="Would you like to discuss or ask?" />
