@@ -8,7 +8,6 @@ import { Thread } from '../../entities';
 
 import {
   neutralizeVoteThreadAsync,
-  removeDownVote,
   upVoteThreadAsync,
 } from '../../slices/threadSlice';
 import {
@@ -69,7 +68,7 @@ const HasUpVotedButton: FC<HasUpVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeUpVoteThread({ threadId: thread.id }));
+      dispatch(removeUpVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         neutralizeVoteThreadAsync({
           threadId: thread.id!,
@@ -99,7 +98,7 @@ const HasNotUpVotedButton: FC<HasNotUpVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeDownVoteThread({threadId: thread.id}));
+      dispatch(removeDownVoteThread({ threadId: thread.id, userId: user!.id }));
       dispatch(appendUpVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         upVoteThreadAsync({
@@ -108,7 +107,7 @@ const HasNotUpVotedButton: FC<HasNotUpVotedButtonInterface> = ({ thread }) => {
         }),
       );
     } catch (error) {
-      dispatch(removeUpVoteThread({ threadId: thread.id }));
+      dispatch(removeUpVoteThread({ threadId: thread.id, userId: user!.id }));
       toast({
         title: 'Failed',
         description: 'Failed to up vote',

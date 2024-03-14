@@ -5,7 +5,7 @@ interface Comment {
   content?: string;
   createdAt?: string;
   owner?: User;
-  upVotesBy?: User[];
-  downVotesBy?: User[];
+  upVotesBy?: string[];
+  downVotesBy?: string[];
 }
 export default Comment;

@@ -15,6 +15,7 @@ const Editor: FC<EditorProps> = ({ className, value = '', onChange }) => {
       className={cn(baseStyles, className)}
       onInput={onChange}
       role="textbox"
+      suppressContentEditableWarning
       contentEditable
     >
       {value}

@@ -37,6 +37,8 @@ const CommentForm: FC<CommentFormProps> = ({ thread }) => {
         owner: user,
         content: comment,
         createdAt: currentDatetime,
+        upVotesBy: [],
+        downVotesBy: [],
       };
 
       const createCommentPayload = {
@@ -49,7 +51,7 @@ const CommentForm: FC<CommentFormProps> = ({ thread }) => {
 
       dispatch(appendComment(appendCommentPayload));
       await dispatch(createCommentAsync(createCommentPayload));
-      setComment("");
+      setComment('');
     } catch (error) {
       dispatch(removeComment(commentId));
       toast({

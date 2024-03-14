@@ -7,11 +7,11 @@ import { Button } from '@/common/components/ui/button';
 import { Thread } from '../../entities';
 
 import {
-    downVoteThreadAsync,
+  downVoteThreadAsync,
   neutralizeVoteThreadAsync,
 } from '../../slices/threadSlice';
 import {
-    appendDownVoteThread,
+  appendDownVoteThread,
   removeDownVoteThread,
   removeUpVoteThread,
 } from '../../slices/threadsSlice';
@@ -69,7 +69,7 @@ const HasDownVotedButton: FC<HasDownVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeDownVoteThread({ threadId: thread.id }));
+      dispatch(removeDownVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         neutralizeVoteThreadAsync({
           threadId: thread.id!,
@@ -93,13 +93,15 @@ const HasDownVotedButton: FC<HasDownVotedButtonInterface> = ({ thread }) => {
   );
 };
 
-const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({ thread }) => {
+const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({
+  thread,
+}) => {
   const totalDownVotes = thread.downVotesBy!.length;
   const { user, token } = useAuth();
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeUpVoteThread({ threadId: thread.id}));
+      dispatch(removeUpVoteThread({ threadId: thread.id, userId: user!.id }));
       dispatch(appendDownVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         downVoteThreadAsync({
@@ -108,7 +110,7 @@ const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({ thread }) =
         }),
       ).unwrap();
     } catch (error) {
-      dispatch(removeDownVoteThread({ threadId: thread.id }));
+      dispatch(removeDownVoteThread({ threadId: thread.id, userId: user!.id }));
       toast({
         title: 'Failed',
         description: 'Failed to up vote',

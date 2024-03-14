@@ -12,7 +12,7 @@ const ThreadComments: FC<ThreadCommentsProps> = ({ thread }) => {
     <section className="mt-8">
       <h2 className="text-md mt-8 font-bold">Comments ({totalComments})</h2>
       <div className="mt-8">
-        <CommentList comments={thread.comments!} />
+        <CommentList thread={thread} comments={thread.comments!} />
       </div>
     </section>
   );

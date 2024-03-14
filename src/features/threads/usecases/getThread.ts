@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
-import {fetchThread} from '../services';
+import { fetchThread } from '../services';
 
 const getThread = async (id: string) => {
   try {

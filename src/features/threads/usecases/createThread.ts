@@ -18,17 +18,17 @@ const handleSuccess = (response: AxiosResponse) => {
 };
 
 const handleError = (error: unknown) => {
-  if(isAxiosError(error)){
+  if (isAxiosError(error)) {
     handleAxiosError(error);
   }
-  throw Error("Failed to post thread");
+  throw Error('Failed to post thread');
 };
 
-const handleAxiosError = (error : AxiosError) => {
-  if(error.response){
+const handleAxiosError = (error: AxiosError) => {
+  if (error.response) {
     throw Error(error.response.data.message);
   }
-  throw Error("Failed to post thread");
-}
+  throw Error('Failed to post thread');
+};
 
 export default createThread;
