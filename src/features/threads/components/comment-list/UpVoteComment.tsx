@@ -12,6 +12,7 @@ import {
   removeCommentUpVote,
   upVoteCommentAsync,
 } from '../../slices/threadSlice';
+import { useNavigate } from 'react-router-dom';
 
 interface UpVoteCommentProps {
   comment: Comment;
@@ -19,13 +20,20 @@ interface UpVoteCommentProps {
 }
 
 const UpVoteComment: FC<UpVoteCommentProps> = ({ comment, thread }) => {
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
 
   const totalUpVotes = comment.upVotesBy!.length;
 
   if (!isAuthenticated) {
+    const redirectToLogin = () => navigate('/login');
     return (
-      <Button className="flex items-center " size="sm" variant="outline">
+      <Button
+        className="flex items-center "
+        onClick={redirectToLogin}
+        size="sm"
+        variant="outline"
+      >
         <ThumbUpIcon />
         <span className="ml-2">{totalUpVotes}</span>
       </Button>
