@@ -21,8 +21,7 @@ import {
 import { useAppDispatch, useAuth } from '@/common/hooks';
 import { createThreadAsync } from '../../slices/threadSlice';
 import { toast } from '@/common/components/ui/use-toast';
-import { nanoid } from '@reduxjs/toolkit';
-import { appendThread, removeThread } from '../../slices/threadsSlice';
+import { getThreadsAsync } from '../../slices/threadsSlice';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -43,21 +42,7 @@ const ThreadCreateForm: FC = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const id = nanoid();
     try {
-      const currentDatetime = new Date().toISOString();
-
-      dispatch(
-        appendThread({
-          id,
-          ownerId: user!.id,
-          upVotesBy: [],
-          downVotesBy: [],
-          createdAt: currentDatetime,
-          ...values,
-          category: values.category === '' ? 'general' : values.category
-        }),
-      );
       await dispatch(
         createThreadAsync({
           thread: values,
@@ -68,8 +53,8 @@ const ThreadCreateForm: FC = () => {
         title: 'Success',
         description: 'Thread created successfully',
       });
+      dispatch(getThreadsAsync());
     } catch (error) {
-      dispatch(removeThread(id));
       toast({
         title: 'Failed',
         description: 'Failed to create thread',

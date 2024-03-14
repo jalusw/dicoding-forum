@@ -15,7 +15,7 @@ const HomePage: FC = () => {
         <section>
           <div className="container mx-auto max-w-screen-xl py-8">
             <div className="grid grid-cols-12 gap-y-8 md:gap-16">
-              <div className="col-span-12 md:col-span-3">
+              <div className="col-span-12  lg:col-span-3">
                 <AuthenticatedWrapper>
                   <ThreadCreateSection />
                   <Separator className="my-4" />
@@ -24,7 +24,7 @@ const HomePage: FC = () => {
                 <Separator className="my-8" />
                 <LeaderboardList />
               </div>
-              <div className="col-span-12 md:col-span-9">
+              <div className="col-span-12 lg:col-span-9">
                 <ThreadListSection />
               </div>
             </div>
