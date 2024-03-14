@@ -15,6 +15,7 @@ const ThreadListSection: FC = () => {
   useEffect(() => {
     dispatch(getThreadsAsync());
     dispatch(getUsersAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (threadsRequestStatus === 'loading' || usersRequestStatus === 'loading') {

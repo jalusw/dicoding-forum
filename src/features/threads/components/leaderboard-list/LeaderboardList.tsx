@@ -15,6 +15,7 @@ const LeaderboardList: FC = () => {
 
   useEffect(() => {
     dispatch(getLeaderboardsAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (leaderboardsRequestStatus === 'loading') {
