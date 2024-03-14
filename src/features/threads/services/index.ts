@@ -1,5 +1,7 @@
 import postThread from './remote/postThread';
+import fetchThread from './remote/fetchThread';
 import fetchThreads from './remote/fetchThreads';
+import fetchLeaderboards from './remote/fetchLeaderboards';
 import postComment from './remote/postComment';
 import postDownVoteThread from './remote/postDownVoteThread';
 import postUpVoteThread from './remote/postUpVoteThread';
@@ -23,7 +25,9 @@ export type {
 };
 
 export {
+  fetchThread,
   fetchThreads,
+  fetchLeaderboards,
   postThread,
   postComment,
   postDownVoteThread,

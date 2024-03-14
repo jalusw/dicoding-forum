@@ -4,6 +4,7 @@ import { threadsSlice, threadSlice } from '@/features/threads/slices';
 import {
   authenticationSlice,
   usersSlice,
+  leaderboardsSlice
 } from '@/features/authentication/slices';
 
 import {
@@ -27,6 +28,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   authentication: authenticationSlice,
   users: usersSlice,
+  leaderboards: leaderboardsSlice,
   threads: threadsSlice,
   thread: threadSlice,
 });

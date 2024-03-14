@@ -5,22 +5,28 @@ import { useAppDispatch, useAuth } from '@/common/hooks';
 import { Button } from '@/common/components/ui/button';
 
 import { Thread } from '../../entities';
+
+import {
+    downVoteThreadAsync,
+  neutralizeVoteThreadAsync,
+} from '../../slices/threadSlice';
+import {
+    appendDownVoteThread,
+  removeDownVoteThread,
+  removeUpVoteThread,
+} from '../../slices/threadsSlice';
+import { toast } from '@/common/components/ui/use-toast';
+import ThumbUpIcon from '@/common/components/icons/ThumbUpIcon';
 import ThumbDownIcon from '@/common/components/icons/ThumbDownIcon';
 import ThumbDownFilledIcon from '@/common/components/icons/ThumbDownFilledIcon';
-import {
-  appendDownVote,
-  downVoteThreadAsync,
-  neutralizeVoteThreadAsync,
-  removeDownVote,
-  removeUpVote,
-} from '../../slices/threadSlice';
-import { toast } from '@/common/components/ui/use-toast';
 
-interface DownVoteButton {
+interface DownVoteThreadListItemButton {
   thread: Thread;
 }
 
-const DownVoteButton: FC<DownVoteButton> = ({ thread }) => {
+const DownVoteThreadListItemButton: FC<DownVoteThreadListItemButton> = ({
+  thread,
+}) => {
   const navigate = useNavigate();
   const totalDownVotes = thread.downVotesBy!.length;
   const { isAuthenticated, user } = useAuth();
@@ -33,7 +39,7 @@ const DownVoteButton: FC<DownVoteButton> = ({ thread }) => {
         onClick={redirectToLogin}
         variant="outline"
       >
-        <ThumbDownIcon />
+        <ThumbUpIcon />
         <span className="ml-2">{totalDownVotes}</span>
       </Button>
     );
@@ -63,15 +69,15 @@ const HasDownVotedButton: FC<HasDownVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeDownVote(user!.id));
+      dispatch(removeDownVoteThread({ threadId: thread.id }));
       await dispatch(
         neutralizeVoteThreadAsync({
           threadId: thread.id!,
           authToken: token,
         }),
-      );
+      ).unwrap();
     } catch (error) {
-      dispatch(appendDownVote(user!.id));
+      dispatch(appendDownVoteThread({ threadId: thread.id, userId: user!.id }));
       toast({
         title: 'Failed',
         description: 'Failed to neutralize vote',
@@ -87,27 +93,25 @@ const HasDownVotedButton: FC<HasDownVotedButtonInterface> = ({ thread }) => {
   );
 };
 
-const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({
-  thread,
-}) => {
+const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({ thread }) => {
   const totalDownVotes = thread.downVotesBy!.length;
   const { user, token } = useAuth();
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(appendDownVote(user!.id));
-      dispatch(removeUpVote(user!.id));
+      dispatch(removeUpVoteThread({ threadId: thread.id}));
+      dispatch(appendDownVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         downVoteThreadAsync({
           threadId: thread.id!,
           authToken: token,
         }),
-      );
+      ).unwrap();
     } catch (error) {
-      dispatch(removeDownVote(user!.id));
+      dispatch(removeDownVoteThread({ threadId: thread.id }));
       toast({
         title: 'Failed',
-        description: 'Failed to down vote',
+        description: 'Failed to up vote',
         variant: 'destructive',
       });
     }
@@ -121,4 +125,4 @@ const HasNotDownVotedButton: FC<HasNotDownVotedButtonInterface> = ({
   );
 };
 
-export default DownVoteButton;
+export default DownVoteThreadListItemButton;

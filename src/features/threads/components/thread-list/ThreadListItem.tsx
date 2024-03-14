@@ -3,11 +3,11 @@ import { Thread } from '../../entities';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/common/components/ui/badge';
 import CommentIcon from '@/common/components/icons/CommentIcon';
-import UpVoteButton from '../reactions/UpVoteButton';
-import DownVoteButton from '../reactions/DownVoteButton';
 import parse from 'html-react-parser';
 import { useAppSelector } from '@/common/hooks';
 import { getTimeSinceCreation } from '@/common/utils/datetime';
+import UpVoteThreadListItemButton from './UpVoteThreadListItemButton';
+import DownVoteThreadListItemButton from './DownVoteThreadListItemButton';
 
 interface ThreadListItem {
   thread: Thread;
@@ -47,8 +47,8 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
       </section>
       <footer>
         <div className="flex flex-wrap gap-3">
-          <UpVoteButton thread={thread} />
-          <DownVoteButton thread={thread} />
+          <UpVoteThreadListItemButton thread={thread} />
+          <DownVoteThreadListItemButton thread={thread} />
           <div className="flex items-center">
             <CommentIcon />
             <span className="ml-2">{thread.totalComments ?? 0}</span>
@@ -58,13 +58,4 @@ const ThreadListItem: FC<ThreadListItem> = ({ thread }) => {
     </article>
   );
 };
-
-interface OwnerThreadProps {
-  ownerId: string;
-}
-
-const OwnerThread: FC<OwnerThreadProps> = ({ ownerId }) => {
-  return <></>;
-};
-
 export default ThreadListItem;

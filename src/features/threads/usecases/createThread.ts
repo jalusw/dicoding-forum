@@ -1,4 +1,4 @@
-import { AxiosResponse, HttpStatusCode } from 'axios';
+import { AxiosError, AxiosResponse, HttpStatusCode, isAxiosError } from 'axios';
 import { postThread, PostThreadArguments } from '../services';
 
 const createThread = async (data: PostThreadArguments) => {
@@ -18,7 +18,17 @@ const handleSuccess = (response: AxiosResponse) => {
 };
 
 const handleError = (error: unknown) => {
-  throw error;
+  if(isAxiosError(error)){
+    handleAxiosError(error);
+  }
+  throw Error("Failed to post thread");
 };
+
+const handleAxiosError = (error : AxiosError) => {
+  if(error.response){
+    throw Error(error.response.data.message);
+  }
+  throw Error("Failed to post thread");
+}
 
 export default createThread;

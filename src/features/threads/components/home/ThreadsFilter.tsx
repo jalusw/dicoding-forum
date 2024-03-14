@@ -15,9 +15,9 @@ const ThreadsFilter: FC = () => {
 
   return (
     <section>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
-          <ThreadsFilterButton category={category!} />
+          <ThreadsFilterButton key={category} category={category!} />
         ))}
       </div>
     </section>
