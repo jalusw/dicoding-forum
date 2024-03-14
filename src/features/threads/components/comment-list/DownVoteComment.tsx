@@ -12,6 +12,7 @@ import {
 } from '../../slices/threadSlice';
 import ThumbDownIcon from '@/common/components/icons/ThumbDownIcon';
 import ThumbDownFilledIcon from '@/common/components/icons/ThumbDownFilledIcon';
+import { useNavigate } from 'react-router-dom';
 
 interface DownVoteCommentProps {
   comment: Comment;
@@ -19,13 +20,20 @@ interface DownVoteCommentProps {
 }
 
 const DownVoteComment: FC<DownVoteCommentProps> = ({ comment, thread }) => {
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
 
   const totalDownVotes = comment.upVotesBy!.length;
 
   if (!isAuthenticated) {
+    const redirectToLogin = () => navigate('/login');
     return (
-      <Button className="flex items-center " size="sm" variant="outline">
+      <Button
+        className="flex items-center"
+        onClick={redirectToLogin}
+        size="sm"
+        variant="outline"
+      >
         <ThumbDownIcon />
         <span className="ml-2">{totalDownVotes}</span>
       </Button>
