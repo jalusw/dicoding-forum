@@ -9,7 +9,7 @@ export interface PostDownVoteCommentArguments {
 const postDownVoteComment = async ({
   threadId,
   commentId,
-  authToken
+  authToken,
 }: PostDownVoteCommentArguments) => {
   return await client.post(
     `/threads/${threadId}/comments/${commentId}/down-vote`,

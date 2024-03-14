@@ -20,7 +20,7 @@ const LeaderboardList: FC = () => {
   if (leaderboardsRequestStatus === 'loading') {
     return (
       <>
-        <h2 className='font-bold'>Leaderboards</h2>
+        <h2 className="font-bold">Leaderboards</h2>
         <LeaderboardListLoading />
       </>
     );

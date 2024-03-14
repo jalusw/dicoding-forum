@@ -31,7 +31,7 @@ const formSchema = z.object({
 
 const ThreadCreateForm: FC = () => {
   const dispatch = useAppDispatch();
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

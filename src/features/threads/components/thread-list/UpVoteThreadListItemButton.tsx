@@ -98,7 +98,7 @@ const HasNotUpVotedButton: FC<HasNotUpVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(removeDownVoteThread({ threadId: thread.id,userId: user!.id }));
+      dispatch(removeDownVoteThread({ threadId: thread.id, userId: user!.id }));
       dispatch(appendUpVoteThread({ threadId: thread.id, userId: user!.id }));
       await dispatch(
         upVoteThreadAsync({

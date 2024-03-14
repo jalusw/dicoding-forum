@@ -39,7 +39,9 @@ const threadsSlice = createSlice({
       const thread = state.threads.filter(
         (thread) => thread.id === action.payload.threadId,
       )[0];
-      thread.upVotesBy = thread.upVotesBy!.filter(userId => userId !== action.payload.userId);
+      thread.upVotesBy = thread.upVotesBy!.filter(
+        (userId) => userId !== action.payload.userId,
+      );
     },
     appendDownVoteThread: (state, action) => {
       const thread = state.threads.filter(
@@ -51,7 +53,9 @@ const threadsSlice = createSlice({
       const thread = state.threads.filter(
         (thread) => thread.id === action.payload.threadId,
       )[0];
-      thread.downVotesBy = thread.upVotesBy!.filter(userId => userId !== action.payload.userId);
+      thread.downVotesBy = thread.upVotesBy!.filter(
+        (userId) => userId !== action.payload.userId,
+      );
     },
     appendThread: (state, action) => {
       state.threads = [action.payload, ...state.threads];

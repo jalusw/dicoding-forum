@@ -5,14 +5,10 @@ import { Button } from '@/common/components/ui/button';
 import { useToast } from '@/common/components/ui/use-toast';
 import {
   appendCommentDownVote,
-  appendCommentUpVote,
   downVoteCommentAsync,
-  downVoteThreadAsync,
   neutralizeVoteCommentAsync,
   removeCommentDownVote,
   removeCommentUpVote,
-  removeDownVote,
-  upVoteCommentAsync,
 } from '../../slices/threadSlice';
 import ThumbDownIcon from '@/common/components/icons/ThumbDownIcon';
 import ThumbDownFilledIcon from '@/common/components/icons/ThumbDownFilledIcon';
@@ -72,8 +68,8 @@ const HasDownVotedButton: FC<HasDownVotedButtonProps> = ({
       );
       await dispatch(
         neutralizeVoteCommentAsync({
-          threadId: thread?.id!,
-          commentId: comment?.id!,
+          threadId: thread!.id!,
+          commentId: comment!.id!,
           authToken: token,
         }),
       ).unwrap();
@@ -121,8 +117,8 @@ const HasNotDownVotedButton: FC<HasNotDownVotedButtonProps> = ({
       );
       await dispatch(
         downVoteCommentAsync({
-          threadId: thread?.id!,
-          commentId: comment?.id!,
+          threadId: thread!.id!,
+          commentId: comment!.id!,
           authToken: token,
         }),
       );

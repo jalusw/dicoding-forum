@@ -12,7 +12,6 @@ import {
   removeCommentUpVote,
   upVoteCommentAsync,
 } from '../../slices/threadSlice';
-import { threadId } from 'worker_threads';
 
 interface UpVoteCommentProps {
   comment: Comment;
@@ -66,8 +65,8 @@ const HasUpVotedButton: FC<HasUpVotedButtonProps> = ({ comment, thread }) => {
       );
       await dispatch(
         neutralizeVoteCommentAsync({
-          threadId: thread?.id!,
-          commentId: comment?.id!,
+          threadId: thread!.id!,
+          commentId: comment!.id!,
           authToken: token,
         }),
       );
@@ -115,8 +114,8 @@ const HasNotUpVotedButton: FC<HasNotUpVotedButtonProps> = ({
       );
       await dispatch(
         upVoteCommentAsync({
-          threadId: thread?.id!,
-          commentId: comment?.id!,
+          threadId: thread!.id!,
+          commentId: comment!.id!,
           authToken: token,
         }),
       );

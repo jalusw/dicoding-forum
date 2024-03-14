@@ -71,7 +71,6 @@ const ThreadListSectionLoading: FC = () => {
           <Skeleton className="h-[32px] w-full max-w-[80px] " />
           <Skeleton className="h-[32px] w-full max-w-[80px] " />
         </div>
-
       </div>
       <div className="w-full rounded-md p-4 shadow-border">
         <Skeleton className="h-[20px] w-[75px]" />

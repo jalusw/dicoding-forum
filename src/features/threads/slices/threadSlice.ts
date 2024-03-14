@@ -47,7 +47,7 @@ const upVoteCommentAsync = createAsyncThunk(
 
 const downVoteCommentAsync = createAsyncThunk(
   'thread/downVoteComment',
-  downVoteComment
+  downVoteComment,
 );
 
 const neutralizeVoteCommentAsync = createAsyncThunk(
