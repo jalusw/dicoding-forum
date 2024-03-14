@@ -12,8 +12,8 @@ const ThreadCreateSection: FC = () => {
     <section className="mb-4">
       <Dialog>
         <DialogTrigger asChild>
-          <div className="container max-w-full mx-0 p-0">
-            <Input value="Would you like to discuss or ask?" />
+          <div className="container mx-0 max-w-full p-0">
+            <Input value="Would you like to discuss or ask?" readOnly />
           </div>
         </DialogTrigger>
         <DialogContent className="max-w-screen-md">

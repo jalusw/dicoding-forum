@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Thread } from '../../entities';
-import UpVoteButton from '../reactions/UpVoteButton';
-import DownVoteButton from '../reactions/DownVoteButton';
-import CommentForm from '../reactions/CommentForm';
+import UpVoteButton from './UpVoteThreadButton';
+import DownVoteButton from './DownVoteThreadButton';
+import CommentForm from '../comments/CommentForm';
 
 interface ThreadReactionProps {
   thread: Thread;

@@ -17,11 +17,11 @@ import { toast } from '@/common/components/ui/use-toast';
 import ThumbUpIcon from '@/common/components/icons/ThumbUpIcon';
 import ThumbUpFilledIcon from '@/common/components/icons/ThumbUpFilledIcon';
 
-interface UpVoteButton {
+interface UpVoteThreadButton {
   thread: Thread;
 }
 
-const UpVoteButton: FC<UpVoteButton> = ({ thread }) => {
+const UpVoteThreadButton: FC<UpVoteThreadButton> = ({ thread }) => {
   const navigate = useNavigate();
   const totalUpVotes = thread.upVotesBy!.length;
   const { isAuthenticated, user } = useAuth();
@@ -64,7 +64,7 @@ const HasUpVotedButton: FC<HasUpVotedButtonInterface> = ({ thread }) => {
   const dispatch = useAppDispatch();
   const onClick = async () => {
     try {
-      dispatch(appendUpVote(user!.id));
+      dispatch(removeUpVote(user!.id));
       await dispatch(
         neutralizeVoteThreadAsync({
           threadId: thread.id!,
@@ -120,4 +120,4 @@ const HasNotUpVotedButton: FC<HasNotUpVotedButtonInterface> = ({ thread }) => {
   );
 };
 
-export default UpVoteButton;
+export default UpVoteThreadButton;

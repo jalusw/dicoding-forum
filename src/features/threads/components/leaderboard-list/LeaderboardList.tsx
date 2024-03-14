@@ -22,10 +22,13 @@ const LeaderboardList: FC = () => {
 
   return (
     <section>
-      <h2 className='font-bold'>Leaderboards</h2>
-      <ul className="flex flex-col space-y-2 mt-4">
+      <h2 className="font-bold">Leaderboards</h2>
+      <ul className="mt-4 flex flex-col space-y-2">
         {leaderboards.map((leaderboard) => (
-          <LeaderboardListItem leaderboard={leaderboard} />
+          <LeaderboardListItem
+            key={leaderboard.user.id}
+            leaderboard={leaderboard}
+          />
         ))}
       </ul>
     </section>

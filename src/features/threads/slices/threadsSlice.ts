@@ -29,6 +29,30 @@ const threadsSlice = createSlice({
   name: 'threads',
   initialState,
   reducers: {
+    appendUpVoteThread: (state, action) => {
+      const thread = state.threads.filter(
+        (thread) => thread.id === action.payload.threadId,
+      )[0];
+      thread.upVotesBy?.push(action.payload.userId);
+    },
+    removeUpVoteThread: (state, action) => {
+      const thread = state.threads.filter(
+        (thread) => thread.id === action.payload.threadId,
+      )[0];
+      thread.upVotesBy?.pop();
+    },
+    appendDownVoteThread: (state, action) => {
+      const thread = state.threads.filter(
+        (thread) => thread.id === action.payload.threadId,
+      )[0];
+      thread.downVotesBy?.push(action.payload.userId);
+    },
+    removeDownVoteThread: (state, action) => {
+      const thread = state.threads.filter(
+        (thread) => thread.id === action.payload.threadId,
+      )[0];
+      thread.downVotesBy?.pop();
+    },
     appendThread: (state, action) => {
       state.threads = [action.payload, ...state.threads];
     },
@@ -59,7 +83,14 @@ const threadsSlice = createSlice({
       }),
 });
 
-export const { appendThread, removeThread, setCategoryFilter } =
-  threadsSlice.actions;
+export const {
+  appendThread,
+  removeThread,
+  setCategoryFilter,
+  appendUpVoteThread,
+  removeUpVoteThread,
+  appendDownVoteThread,
+  removeDownVoteThread
+} = threadsSlice.actions;
 export { getThreadsAsync };
 export default threadsSlice.reducer;
