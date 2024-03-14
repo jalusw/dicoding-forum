@@ -1,13 +1,16 @@
 import { FC } from 'react';
-import { Comment } from '../../entities';
+import { Comment, Thread } from '../../entities';
 import parse from 'html-react-parser';
 import { getTimeSinceCreation } from '@/common/utils/datetime';
+import UpVoteComment from './UpVoteComment';
+import DownVoteComment from './DownVoteComment';
 
 interface CommentListItemProps {
   comment: Comment;
+  thread?: Thread | null;
 }
 
-const CommentListItem: FC<CommentListItemProps> = ({ comment }) => {
+const CommentListItem: FC<CommentListItemProps> = ({ comment, thread }) => {
   const username = comment.owner?.name ?? '';
   const avatar = comment.owner?.avatar;
   const createdAt = new Date(comment.createdAt!);
@@ -31,6 +34,12 @@ const CommentListItem: FC<CommentListItemProps> = ({ comment }) => {
         </p>
       </header>
       <section className="mt-4">{content}</section>
+      <footer className="mt-4">
+        <div className="flex space-x-2">
+          <UpVoteComment comment={comment} thread={thread} />
+          <DownVoteComment comment={comment} thread={thread} />
+        </div>
+      </footer>
     </article>
   );
 };

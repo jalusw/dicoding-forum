@@ -1,7 +1,7 @@
-import client from "@/core/api/client";
+import client from '@/core/api/client';
 
-const fetchLeaderboards  =  async () => {
-  return await client.get("leaderboards");
-}
+const fetchLeaderboards = async () => {
+  return await client.get('leaderboards');
+};
 
 export default fetchLeaderboards;

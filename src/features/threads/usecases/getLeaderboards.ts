@@ -25,7 +25,7 @@ const handleError = (error) => {
 };
 
 const handleAxiosError = (error: AxiosError) => {
-  if(error.response){
+  if (error.response) {
     throw Error(error.response.data.message);
   }
 };

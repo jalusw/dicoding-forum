@@ -24,5 +24,4 @@ const ThreadsFilter: FC = () => {
   );
 };
 
-
 export default ThreadsFilter;

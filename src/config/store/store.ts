@@ -4,7 +4,7 @@ import { threadsSlice, threadSlice } from '@/features/threads/slices';
 import {
   authenticationSlice,
   usersSlice,
-  leaderboardsSlice
+  leaderboardsSlice,
 } from '@/features/authentication/slices';
 
 import {
